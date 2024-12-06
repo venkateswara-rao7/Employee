@@ -13,12 +13,12 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @PostMapping ("/employees")
+    @PostMapping ("")
     public ResponseEntity<EmployeeEntity> saveEmployee(@RequestBody EmployeeEntity employee) {
         return ResponseEntity.ok(employeeService.saveEmployee(employee));
     }
 
-    @GetMapping("/tax/{employeeid}")
+    @GetMapping("/tax/{employeeId}")
     public ResponseEntity<EmployeeEntity> getEmployeeTaxDetails(@PathVariable String employeeId) {
         EmployeeEntity employee = employeeService.getAllEmployees().stream()
                 .filter(emp -> emp.getEmployeeId().equals(employeeId))

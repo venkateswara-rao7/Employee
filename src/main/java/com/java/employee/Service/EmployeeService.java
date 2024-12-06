@@ -52,6 +52,7 @@ public class EmployeeService {
         return tax;
     }
 
+
     public double calculateCess(double yearlySalary) {
         if (yearlySalary > 2500000) {
             return (yearlySalary - 2500000) * 0.02;
@@ -80,7 +81,7 @@ public class EmployeeService {
 
     public double calculateTotalSalary(EmployeeEntity employee) {
         double yearlySalary = calculateYearlySalary(employee);
-        return yearlySalary + calculateTax(yearlySalary) + calculateCess(yearlySalary);
+        return yearlySalary - calculateTax(yearlySalary) - calculateCess(yearlySalary);
     }
 
     public EmployeeEntity getEmployeeTaxDetails(EmployeeEntity employee) {
@@ -88,15 +89,21 @@ public class EmployeeService {
         double tax = calculateTax(yearlySalary);
         double cess = calculateCess(yearlySalary);
 
-        return new EmployeeEntity(
+        employee.setTax(tax);
+        employee.setCess(cess);
+        return employee;
+
+       /* return new EmployeeEntity(
                 employee.getEmployeeId(),
                 employee.getFirstName(),
                 employee.getLastName(),
                 employee.getEmail(),
                 employee.getPhoneNumbers().toString(),
                 employee.getDateOfJoining(),
-                employee.getSalary()
+                employee.getSalary(),
+                employee.getCess(),
+                employee.getTax()
         );
-
+*/
     }
 }
